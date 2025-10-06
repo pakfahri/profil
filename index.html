@@ -285,18 +285,23 @@
         }
 
         .video-container {
+            position: relative;
+            overflow: hidden;
             width: 100%;
+            padding-top: 56.25%; /* <-- Angka untuk rasio 16:9 */
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             margin-top: 40px;
             margin-bottom: 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         
         .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block; /* Menghilangkan spasi kecil di bawah video */
+            height: 100%;
+            border: none;
         }
 
         /* Section Styles */
