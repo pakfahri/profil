@@ -2555,6 +2555,7 @@
                     
                     <section>
     <!-- ==================== GUNAKAN BLOK INI ==================== -->
+    <!-- ==================== GUNAKAN BLOK INI ==================== -->
 <div class="contact-form-card" data-aos="fade-left">
     <h3>Kirim Pesan</h3>
     <p>Isi formulir di bawah ini untuk konsultasi atau pemesanan layanan</p>
@@ -2606,7 +2607,61 @@
         </button>
     </form>
 </div>
-<!-- AKHIR BLOK FORM -->
+
+<!-- SCRIPT YANG LEBIH KUAT UNTUK MENGHINDARI KONFLIK -->
+<script>
+    (function() {
+        'use strict';
+
+        // Tunggu hingga seluruh halaman dimuat
+        window.addEventListener('load', function() {
+            
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
+
+            // Pastikan form dan statusDiv ada sebelum menambahkan event listener
+            if (form && statusDiv) {
+                
+                form.addEventListener('submit', async function(event) {
+                    event.preventDefault(); // Cegah reload halaman
+
+                    const formData = new FormData(form);
+                    
+                    // Tampilkan pesan loading
+                    statusDiv.style.display = 'block';
+                    statusDiv.style.color = '#007bff';
+                    statusDiv.innerText = 'Mengirim pesan...';
+
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            statusDiv.style.color = '#28a745';
+                            statusDiv.innerText = 'Pesan Anda telah terkirim! Terima kasih.';
+                            form.reset(); // Kosongkan form
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    } catch (error) {
+                        statusDiv.style.color = '#dc3545';
+                        statusDiv.innerText = 'Oops! Ada masalah. Silakan coba lagi.';
+                        console.error('Error!', error.message);
+                    }
+                });
+
+            } else {
+                console.error('Formulir atau div status tidak ditemukan!');
+            }
+        });
+
+    })();
+</script>
+<!-- ==================== AKHIR BLOK ==================== -->
+    <!-- AKHIR BLOK FORM -->
                 </div>
             </div>
         </div>
@@ -2820,60 +2875,6 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
-
-    <!-- SCRIPT YANG LEBIH KUAT UNTUK MENGHINDARI KONFLIK -->
-
-    (function() {
-        'use strict';
-
-        // Tunggu hingga seluruh halaman dimuat
-        window.addEventListener('load', function() {
-            
-            const form = document.getElementById('contactForm');
-            const statusDiv = document.getElementById('formStatus');
-
-            // Pastikan form dan statusDiv ada sebelum menambahkan event listener
-            if (form && statusDiv) {
-                
-                form.addEventListener('submit', async function(event) {
-                    event.preventDefault(); // Cegah reload halaman
-
-                    const formData = new FormData(form);
-                    
-                    // Tampilkan pesan loading
-                    statusDiv.style.display = 'block';
-                    statusDiv.style.color = '#007bff';
-                    statusDiv.innerText = 'Mengirim pesan...';
-
-                    try {
-                        const response = await fetch(form.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: { 'Accept': 'application/json' }
-                        });
-
-                        if (response.ok) {
-                            statusDiv.style.color = '#28a745';
-                            statusDiv.innerText = 'Pesan Anda telah terkirim! Terima kasih.';
-                            form.reset(); // Kosongkan form
-                        } else {
-                            throw new Error('Form submission failed');
-                        }
-                    } catch (error) {
-                        statusDiv.style.color = '#dc3545';
-                        statusDiv.innerText = 'Oops! Ada masalah. Silakan coba lagi.';
-                        console.error('Error!', error.message);
-                    }
-                });
-
-            } else {
-                console.error('Formulir atau div status tidak ditemukan!');
-            }
-        });
-
-    })();
 </script>
-<!-- ==================== AKHIR BLOK ==================== -->
-
 </body>
 </html>
