@@ -1,0 +1,2869 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahri Informatika - Transformasi Digital Pendidikan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            --success-gradient: linear-gradient(135deg, #0ba360 0%, #3cba92 100%);
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://picsum.photos/seed/tech/1920/1080.jpg') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            color: var(--secondary-color);
+        }
+
+        .btn-hero-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            border-color: white;
+        }
+
+        .btn-hero-free {
+            background: var(--success-gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(11, 163, 96, 0.3);
+        }
+
+        .btn-hero-free:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(11, 163, 96, 0.4);
+        }
+
+        .hero-image-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: rotate(3deg);
+            transition: all 0.3s ease;
+        }
+
+        .hero-image-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .video-container {
+            margin-top: 40px;
+            margin-bottom: 20px; /* Tambah spasi di bawah video */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .skill-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .skill-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-description {
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .vision-card {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Style untuk pesan status formulir */
+#formStatus {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    display: none; /* Sembunyikan secara default */
+}
+
+#formStatus.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block; /* Tampilkan jika sukses */
+}
+
+#formStatus.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block; /* Tampilkan jika error */
+}
+
+        /* Services Section */
+        .services-section {
+            background: white;
+        }
+
+        .service-category {
+            margin-bottom: 80px; /* Tambah jarak antar kategori layanan */
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .category-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .service-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: var(--text-dark);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0ba360;
+            font-weight: bold;
+        }
+
+        .service-tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* Coding Comparison Card */
+        .coding-comparison-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-top: 80px; /* Tambah jarak yang lebih besar antara ikon guru dan kotak metode */
+            margin-bottom: 80px; /* Tambah jarak di bawah kotak */
+        }
+
+        .method-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .method-card h5 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .method-features {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .method-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+
+        .method-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .method-badge {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Ebook Section */
+        .ebook-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 100px 0;
+        }
+
+        .ebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .ebook-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .ebook-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .ebook-cover {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .ebook-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .ebook-card:hover .ebook-cover img {
+            transform: scale(1.05);
+        }
+
+        .ebook-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .ebook-content {
+            padding: 30px;
+        }
+
+        .ebook-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .ebook-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .ebook-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .ebook-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            color: var(--text-dark);
+        }
+
+        .ebook-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .ebook-form {
+            margin-top: 20px;
+        }
+
+        .ebook-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .ebook-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .ebook-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-ebook {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-ebook:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            background: white;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .gallery-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: white;
+            position: relative;
+        }
+
+        .testimonials-section::before {
+            content: '"';
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            font-size: 200px;
+            color: rgba(102, 126, 234, 0.05);
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: rgba(102, 126, 234, 0.1);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .author-info h5 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            margin-top: 15px;
+            color: #ffc107;
+        }
+
+        /* Blog Section */
+        .blog-section { /*sembunyikan blog dari sini*/
+            display: none;
+        .blog-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 30px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-excerpt {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .blog-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-link:hover {
+            gap: 10px;
+            color: var(--secondary-color);
+        }
+            } /*sembunyikan blog sampai sini*/
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-info-card {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-card::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .contact-info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .contact-details h5 {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .contact-details p {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .contact-form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .contact-form-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .contact-form-card p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-submit {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gradient);
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-description {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .footer-links h5 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Floating Action Button */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .fab-button {
+            width: 60px;
+            height: 60px;
+            background: var(--success-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .fab-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-hero {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .skill-grid,
+            .service-grid,
+            .gallery-grid,
+            .testimonial-grid,
+            .blog-grid,
+            .ebook-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Perbaikan Mobile Navigation */
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .navbar-toggler {
+                border: none;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .navbar-toggler:focus {
+                box-shadow: none;
+            }
+            
+            .navbar-nav {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                margin-top: 15px;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 8px 0;
+                padding: 8px 15px;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+            }
+            
+            .navbar-nav .nav-link:hover {
+                background: rgba(102, 126, 234, 0.1);
+            }
+            
+            /* Perbaikan Hero Section di Mobile */
+            .hero-section {
+                min-height: auto;
+                padding: 120px 0 80px;
+            }
+            
+            .hero-content {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 6px 15px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+                line-height: 1.2;
+                margin-bottom: 20px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+            
+            .btn-hero {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-image-container {
+                margin-top: 30px;
+            }
+            
+            .hero-image-card {
+                transform: none;
+                padding: 15px;
+            }
+            
+            .about-badge {
+                bottom: -15px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .video-container {
+                margin-top: 30px;
+                margin-bottom: 15px; /* Sesuaikan jarak di mobile */
+            }
+            
+            /* Perbaikan About Section di Mobile */
+            .about-card {
+                padding: 25px;
+            }
+            
+            .about-image-wrapper {
+                margin-bottom: 20px;
+            }
+            
+            .skill-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin-top: 25px;
+            }
+            
+            .skill-card {
+                padding: 20px;
+            }
+            
+            .skill-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .skill-title {
+                font-size: 1rem;
+                margin-bottom: 5px;
+            }
+            
+            .skill-description {
+                font-size: 0.85rem;
+            }
+            
+            .vision-card {
+                padding: 25px;
+                margin-top: 25px;
+            }
+            
+            /* Perbaikan Services Section di Mobile */
+            .service-category {
+                margin-bottom: 50px; /* Kurangi jarak di mobile */
+            }
+            
+            .category-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .category-title {
+                font-size: 1.6rem;
+            }
+            
+            .service-card {
+                padding: 25px;
+            }
+            
+            .service-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .service-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .service-description {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
+            /* Perbaikan Coding Comparison Card di Mobile */
+            .coding-comparison-card {
+                margin-top: 50px; /* Kurangi jarak di mobile */
+                padding: 25px;
+                margin-bottom: 50px; /* Kurangi jarak di bawah di mobile */
+            }
+            
+            /* Perbaikan Ebook Section di Mobile */
+            .ebook-section {
+                padding: 80px 0;
+            }
+            
+            .ebook-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-top: 30px;
+            }
+            
+            .ebook-cover {
+                height: 200px;
+            }
+            
+            .ebook-content {
+                padding: 20px;
+            }
+            
+            .ebook-title {
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+            }
+            
+            .ebook-description {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
+            .ebook-input-group {
+                flex-direction: column;
+            }
+            
+            /* Perbaikan Gallery Section di Mobile */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .gallery-image {
+                height: 200px;
+            }
+            
+            .gallery-overlay {
+                padding: 20px 15px 15px;
+            }
+            
+            .gallery-title {
+                font-size: 1.1rem;
+            }
+            
+            .gallery-description {
+                font-size: 0.85rem;
+            }
+            
+            /* Perbaikan Testimonials Section di Mobile */
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .testimonial-card {
+                padding: 25px;
+            }
+            
+            .testimonial-content {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+            
+            .author-avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            /* Perbaikan Blog Section di Mobile */
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .blog-image {
+                height: 180px;
+            }
+            
+            .blog-content {
+                padding: 20px;
+            }
+            
+            .blog-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .blog-excerpt {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
+            /* Perbaikan Contact Section di Mobile */
+            .contact-info-card {
+                padding: 25px;
+            }
+            
+            .contact-info-card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .contact-item {
+                margin-bottom: 15px;
+            }
+            
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .contact-details p {
+                font-size: 1rem;
+            }
+            
+            .contact-form-card {
+                padding: 25px;
+            }
+            
+            .contact-form-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            /* Perbaikan Footer di Mobile */
+            footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-brand {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+            
+            .footer-description {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+            
+            .footer-links h5 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+            
+            .footer-links a {
+                font-size: 0.9rem;
+            }
+            
+            .footer-bottom {
+                margin-top: 25px;
+                padding-top: 20px;
+                font-size: 0.85rem;
+            }
+            
+            /* Perbaikan FAB di Mobile */
+            .fab-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .fab-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: all 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code me-2"></i>Fahri Informatika
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ebook">Ebook</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                       <!-- <a class="nav-link" href="#testimonials">Testimoni</a> -->
+                    </li>
+                    <li class="nav-item">
+                       <!-- <a class="nav-link" href="#blog">Blog</a> -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-particles" id="particles"></div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content" data-aos="fade-right">
+                        <div class="hero-badge">
+                            <i class="fas fa-star me-2"></i>Fasilitator Nasional Koding KA
+                        </div>
+                        <h1 class="hero-title">Transformasi Digital Pendidikan Indonesia</h1>
+                        <p class="hero-subtitle">Belajar Teknologi dengan Cara yang Menyenangkan & Interaktif</p>
+                        <p class="hero-description">
+                            Saya <strong>Fahri</strong>, Guru Informatika yang berdedikasi mengenalkan dunia digital sejak dini. 
+                            Dari pengolah kata hingga koding visual - semua bisa dipelajari dengan seru!
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#services" class="btn-hero btn-hero-primary">
+                                <i class="fas fa-rocket"></i>
+                                Mulai Belajar Sekarang
+                            </a>
+                            <a href="#contact" class="btn-hero btn-hero-secondary">
+                                <i class="fas fa-calendar-check"></i>
+                                Booking Konsultasi Gratis
+                            </a>
+                            <!-- TOMBOL COBA GRATIS DITAMBAHKAN DI SINI -->
+                            <a href="#services" class="btn-hero btn-hero-free">
+                                <i class="fas fa-gift me-2"></i>Coba Gratis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image-container" data-aos="fade-left">
+                        <div class="hero-image-card">
+                            <img src="https://picsum.photos/seed/teaching/600/500.jpg" alt="Fahri Mengajar" class="hero-image">
+                            <div class="about-badge">
+                                <i class="fas fa-users me-2"></i>300+ Siswa
+                            </div>
+                        </div>
+                        <div class="video-container">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Pembelajaran" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Tentang Saya</h2>
+                    <p class="section-subtitle">
+                        "Menjadi Problem Solver dengan Computational Thinking serta Meningkatkan Literasi Digital Sejak Dini"
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="about-image-wrapper">
+                        <img src="https://picsum.photos/seed/profile/500/600.jpg" alt="Fahri Profile" class="about-image">
+                        <div class="about-badge">
+                            <i class="fas fa-award me-2"></i>Certified Trainer
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="about-card">
+                        <h3 class="mb-4">Halo, Saya Fahri! 👋</h3>
+                        <p class="mb-4">
+                            Sebagai <strong>Guru Informatika</strong> dan <strong>Fasilitator Nasional Koding KA</strong>, 
+                            saya berpengalaman melatih siswa dari berbagai jenjang (TK hingga SMP) 
+                            serta puluhan guru dalam memahami teknologi digital dasar dan berpikir komputasional.
+                        </p>
+                        <p class="mb-4">
+                            Filosofi saya sederhana: <strong>teknologi bukanlah hal yang menakutkan</strong>, 
+                            melainkan alat yang menyenangkan untuk berekspresi dan belajar. 
+                            Dengan pendekatan yang tepat, setiap siswa bisa menjadi generasi digital yang cakap!
+                        </p>
+                        
+                        <h4 class="mb-4">Keahlian Utama:</h4>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <div class="skill-icon">
+                                    <i class="fas fa-file-word"></i>
+                                </div>
+                                <h5 class="skill-title">Pengolah Kata</h5>
+                                <p class="skill-description">Google Docs</p>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-icon">
+                                    <i class="fas fa-file-excel"></i>
+                                </div>
+                                <h5 class="skill-title">Pengolah Data</h5>
+                                <p class="skill-description">Google Sheets</p>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-icon">
+                                    <i class="fas fa-palette"></i>
+                                </div>
+                                <h5 class="skill-title">Desain Digital</h5>
+                                <p class="skill-description">Canva & Tools Visual</p>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h5 class="skill-title">Fun Coding</h5>
+                                <p class="skill-description">Scratch & Block Programming</p>
+                            </div>
+                        </div>
+                        
+                        <div class="vision-card">
+                            <h4><i class="fas fa-eye me-2"></i>Visi & Misi</h4>
+                            <p class="mb-0">
+                                "Membentuk generasi yang cakap digital, berpikir logis, 
+                                dan beretika dalam teknologi untuk masa depan Indonesia yang lebih baik."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Layanan Premium</h2>
+                    <p class="section-subtitle">
+                        Program pembelajaran teknologi digital yang dirancang khusus untuk setiap kebutuhan
+                    </p>
+                </div>
+            </div>
+
+            <!-- Services for Students -->
+            <div class="service-category" data-aos="fade-up">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3 class="category-title">Untuk Siswa</h3>
+                    <p class="text-muted">Program Digital Kreatif & Fun Coding</p>
+                </div>
+                
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <h4 class="service-title">Pengolah Kata Dasar</h4>
+                        <p class="service-description">
+                            Kuasai kemampuan mengetik, formatting dokumen, membuat surat, laporan, dan tugas sekolah dengan tampilan profesional.
+                        </p>
+                        <ul class="service-features">
+                            <li>Teknik mengetik 10 jari</li>
+                            <li>Formatting profesional</li>
+                            <li>Template dokumen keren</li>
+                            <li>Kolaborasi real-time</li>
+                        </ul>
+                        <div>
+                            <span class="service-tag">Google Docs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <h4 class="service-title">Pengolah Data & Grafik</h4>
+                        <p class="service-description">
+                            Pelajari cara mengelola data, membuat tabel, grafik, dan analisis sederhana untuk tugas sekolah dan proyek.
+                        </p>
+                        <ul class="service-features">
+                            <li>Pengelolaan data dasar</li>
+                            <li>Formula sederhana</li>
+                            <li>Pemfilteran dan Pengurutan Data</li>
+                            <li>Visualisasi data kreatif</li>
+                        </ul>
+                        <div>
+                            <span class="service-tag">Google Sheets</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4 class="service-title">Desain Digital Kreatif</h4>
+                        <p class="service-description">
+                            Eksplorasi kreativitas dengan tools desain digital untuk membuat poster, presentasi, dan konten visual menarik.
+                        </p>
+                        <ul class="service-features">
+                            <li>Prinsip desain dasar</li>
+                            <li>Komposisi visual</li>
+                            <li>Tipografi kreatif</li>
+                            <li>Presentasi visual</li>
+                        </ul>
+                        <div>
+                            <span class="service-tag">Canva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coding Comparison Card untuk Siswa -->
+            <div class="coding-comparison-card" data-aos="fade-up">
+                <h3 class="text-center mb-4">Pembelajaran Koding</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="method-card">
+                            <div class="method-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h5>Fun Learning Approach</h5>
+                            <p>Pembelajaran coding dengan pendekatan berbasis game dan aktivitas interaktif yang menyenangkan tanpa gawai.</p>
+                            <ul class="method-features">
+                                <li>Aktivitas Interaktif dan Kolaboratif</li>
+                                <li>Learning by playing</li>
+                                <li>Story-based challenges</li>
+                                <li>Collaborative projects</li>
+                            </ul>
+                            <div class="method-badge">Untuk siswa maupun pengajar</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="method-card">
+                            <div class="method-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h5>Project-Based Learning</h5>
+                            <p>Pembelajaran coding dengan fokus pada proyek nyata yang dapat diaplikasikan dalam kehidupan sehari-hari maupun yang diinginkan.</p>
+                            <ul class="method-features">
+                                <li>Visual Block Programming</li>
+                                <li>Problem-solving skills</li>
+                                <li>Critical thinking</li>
+                                <li>Gamified Learning</li>
+                            </ul>
+                            <div class="method-badge">Untuk siswa maupun pengajar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Services for Teachers -->
+            <div class="service-category" data-aos="fade-up">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="category-title">Untuk Guru</h3>
+                    <p class="text-muted">Pelatihan & Pengembangan Kompetensi Digital</p>
+                </div>
+                
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h4 class="service-title">Integrasi Teknologi di Kelas</h4>
+                        <p class="service-description">
+                            Pelajari cara mengintegrasikan teknologi dalam pembelajaran untuk meningkatkan engagement dan hasil belajar siswa.
+                        </p>
+                        <ul class="service-features">
+                            <li>Strategi blended learning</li>
+                            <li>Tools pembelajaran interaktif</li>
+                            <li>Asesmen digital</li>
+                            <li>Kolaborasi Real-time</li>
+                        </ul>
+                        <div>
+                            <span class="service-tag">EdTech</span>
+                            <span class="service-tag">Digital Pedagogy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4 class="service-title">Pengenalan Coding untuk Guru</h4>
+                        <p class="service-description">
+                            Pelatihan dasar coding dan computational thinking untuk guru agar dapat mengajarkan konsep pemrograman dasar baik dengan gawai maupun tanpa gawai.
+                        </p>
+                        <ul class="service-features">
+                            <li>Konsep computational thinking</li>
+                            <li>Platform pembelajaran coding</li>
+                            <li>Strategi mengajar coding</li>
+                            <li>Kurikulum coding dasar</li>
+                        </ul>
+                        <div>
+                            <span class="service-tag">Computational Thinking</span>
+                            <span class="service-tag">Block Programming</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h4 class="service-title">Workshop & Inhouse Training</h4>
+                        <p class="service-description">
+                            Program pelatihan khusus untuk sekolah dengan kurikulum yang disesuaikan dengan kebutuhan institusi.
+                        </p>
+                        <ul class="service-features">
+                            <li>Mata Pelajaran Pilihan Koding KA</li>
+                            <li>Penggunaan Kecerdasan Artifisial</li>
+                            <li>Pembuatan Website untuk Portofolio maupun Website Sekolah</li>
+                            <li>Follow-up & mentoring</li>
+                        </ul>
+                        <div>
+                            <span class="service-tag">Custom Training</span>
+                            <span class="service-tag">Certification</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ebook Section -->
+    <section id="ebook" class="ebook-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Ebook Premium</h2>
+                    <p class="section-subtitle">
+                        Materi pembelajaran digital yang komprehensif dan mudah dipahami
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="ebook-grid">
+                <div class="ebook-card" data-aos="fade-up" hidden>
+                    <div class="ebook-cover">
+                        <img src="https://picsum.photos/seed/ebook1/400/300.jpg" alt="Ebook Cover">
+                        <div class="ebook-badge">Bestseller</div>
+                    </div>
+                    <div class="ebook-content">
+                        <h3 class="ebook-title">Panduan Lengkap Google Docs untuk Pemula</h3>
+                        <p class="ebook-description">
+                            Fokus pada kemampuan dasar penulisan dan pemformatan di Google Docs. Pelajari cara menggunakan alat-alat standar Docs untuk membuat dokumen profesional dan terstruktur.
+                        </p>
+                        <ul class="ebook-features">
+                            <li>Membuat Struktur Dokumen (Heading)</li>
+                            <li>Mengatur Kolaborasi & Komentar</li>
+                            <li>Trik Pemformatan Teks Cepat</li>
+                            <li>Menggunakan Template Bawaan</li>
+                        </ul>
+                        <div class="ebook-form">
+                            <div class="ebook-input-group">
+                                <textarea class="ebook-input" id="message1" rows="3" placeholder="Pesan Anda">Hai pak Fahri, saya mau ebook-nya</textarea>
+                                <button class="btn-ebook" onclick="sendToWhatsApp('message1')">
+                                    <i class="fab fa-whatsapp"></i> Kirim
+                                </button>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                
+                <div class="ebook-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="ebook-cover">
+                        <img src="https://picsum.photos/seed/ebook2/400/300.jpg" alt="Ebook Cover">
+                        <div class="ebook-badge">New</div>
+                    </div>
+                    <div class="ebook-content">
+                        <h3 class="ebook-title">Fun Coding dengan Scratch untuk Anak</h3>
+                        <p class="ebook-description">
+                        Perkenalan langkah demi langkah ke dunia coding visual. Kuasai 5 blok perintah dasar dan logika Events (Kejadian) untuk membuat animasi atau game interaktif sederhana.
+                        </p>
+                        <ul class="ebook-features">
+                            <li>Mengenal Blok Motion & Events</li>
+                            <li>Logika Start dan Stop Proyek</li>
+                            <li>Mengatur Posisi Sprite (Karakter)</li>
+                            <li>Membuat Loop (Perulangan) Dasar</li>
+                        </ul>
+                        <div class="ebook-form">
+                            <div class="ebook-input-group">
+                                <textarea class="ebook-input" id="message2" rows="3" placeholder="Pesan Anda">Hai pak Fahri, saya mau ebook-nya</textarea>
+                                <button class="btn-ebook" onclick="sendToWhatsApp('message2')">
+                                    <i class="fab fa-whatsapp"></i> Kirim
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ebook-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="ebook-cover">
+                        <img src="https://picsum.photos/seed/ebook3/400/300.jpg" alt="Ebook Cover">
+                        <div class="ebook-badge">Premium</div>
+                    </div>
+                    <div class="ebook-content">
+                        <h3 class="ebook-title">Desain Grafis dengan Canva untuk Guru</h3>
+                        <p class="ebook-description">
+                            Panduan praktis 10 halaman untuk membuat materi pembelajaran visual yang menarik dengan cepat di Canva, tanpa perlu kemampuan desain profesional yang rumit. Kuasai dasar-dasar antarmuka dan keterampilan esensial untuk mengubah ide pelajaran menjadi konten visual yang memukau.
+                        </p>
+                        <ul class="ebook-features">
+                            <li>Trik Pemilihan Template Cerdas</li>
+                            <li>Mengatur Teks & Font untuk Keterbacaan Tinggi</li>
+                            <li>Memasukkan Gambar & Ikon dengan Teknik Drag-and-Drop</li>
+                            <li>Trik Tepat Menyimpan File untuk Cetak atau Unggah Digital</li>
+                        </ul>
+                        <div class="ebook-form">
+                            <div class="ebook-input-group">
+                                <textarea class="ebook-input" id="message3" rows="3" placeholder="Pesan Anda">Hai pak Fahri, saya mau ebook-nya</textarea>
+                                <button class="btn-ebook" onclick="sendToWhatsApp('message3')">
+                                    <i class="fab fa-whatsapp"></i> Kirim
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Galeri Kegiatan</h2>
+                    <p class="section-subtitle">
+                        Dokumentasi pembelajaran dan workshop yang telah dilaksanakan
+                    </p>
+                </div>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="fade-up">
+                    <img src="https://picsum.photos/seed/gallery1/400/280.jpg" alt="Gallery Image" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Workshop Coding Dasar</h4>
+                        <p class="gallery-description">SDN Harapan Bangsa, Jakarta</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://picsum.photos/seed/gallery2/400/280.jpg" alt="Gallery Image" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Pelatihan Google Workspace</h4>
+                        <p class="gallery-description">SMP Nusantara, Bandung</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://picsum.photos/seed/gallery3/400/280.jpg" alt="Gallery Image" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Lomba Coding Visual</h4>
+                        <p class="gallery-description">TK Al-Azhar, Surabaya</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://picsum.photos/seed/gallery4/400/280.jpg" alt="Gallery Image" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Training of Trainers</h4>
+                        <p class="gallery-description">Kemendikbudristek, Jakarta</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://picsum.photos/seed/gallery5/400/280.jpg" alt="Gallery Image" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Digital Literacy Camp</h4>
+                        <p class="gallery-description">SMK Teknologi, Yogyakarta</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://picsum.photos/seed/gallery6/400/280.jpg" alt="Gallery Image" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Fun Coding with Scratch</h4>
+                        <p class="gallery-description">SDIT Insan Kamil, Semarang</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section section" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Testimoni</h2>
+                    <p class="section-subtitle">
+                        Apa kata mereka tentang pengalaman belajar bersama
+                    </p>
+                </div>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-icon">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <p class="testimonial-content">
+                        "Pak Fahri berhasil membuat pembelajaran coding menjadi sangat menyenangkan! Anak saya yang awalnya takut dengan teknologi sekarang sangat antusias setiap kali ada sesi pembelajaran. Metode belajarnya interaktif dan mudah dipahami."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://picsum.photos/seed/author1/60/60.jpg" alt="Author" class="author-avatar">
+                        <div class="author-info">
+                            <h5>Ratna Sari</h5>
+                            <p>Orang Tua Siswa SD</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-icon">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <p class="testimonial-content">
+                        "Sebagai guru, saya sangat terbantu dengan pelatihan yang diberikan Pak Fahri. Materinya relevan dengan kebutuhan kurikulum dan disampaikan dengan cara yang praktis. Sekarang saya lebih percaya diri mengintegrasikan teknologi di kelas."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://picsum.photos/seed/author2/60/60.jpg" alt="Author" class="author-avatar">
+                        <div class="author-info">
+                            <h5>Budi Santoso, S.Pd</h5>
+                            <p>Guru SMP Negeri 5</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-icon">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <p class="testimonial-content">
+                        "Workshop yang diselenggarakan di sekolah kami sangat bermanfaat. Siswa-siswa sangat termotivasi dan hasil karya mereka luar biasa. Pak Fahri juga memberikan follow-up yang baik setelah workshop selesai."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://picsum.photos/seed/author3/60/60.jpg" alt="Author" class="author-avatar">
+                        <div class="author-info">
+                            <h5>Dra. Indah Permata</h5>
+                            <p>Kepala Sekolah SD Islam Plus</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Blog & Artikel</h2>
+                    <p class="section-subtitle">
+                        Tips, panduan, dan wawasan seputar pendidikan digital
+                    </p>
+                </div>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card" data-aos="fade-up">
+                    <img src="https://picsum.photos/seed/blog1/400/220.jpg" alt="Blog Image" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-category">Tips</div>
+                        <h3 class="blog-title">5 Cara Mengenalkan Coding pada Anak Usia Dini</h3>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 15 Mei 2023</span>
+                            <span><i class="fas fa-clock"></i> 5 menit baca</span>
+                        </div>
+                        <p class="blog-excerpt">
+                            Mengenalkan coding pada anak sejak dini dapat membantu mengembangkan kemampuan berpikir logis dan problem solving. Berikut adalah 5 cara yang dapat orang tua lakukan...
+                        </p>
+                        <a href="#" class="blog-link">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://picsum.photos/seed/blog2/400/220.jpg" alt="Blog Image" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-category">Tutorial</div>
+                        <h3 class="blog-title">Membuat Presentasi Interaktif dengan Google Slides</h3>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 8 Mei 2023</span>
+                            <span><i class="fas fa-clock"></i> 7 menit baca</span>
+                        </div>
+                        <p class="blog-excerpt">
+                            Presentasi yang interaktif dapat meningkatkan engagement siswa dalam pembelajaran. Pelajari cara membuat presentasi yang menarik dengan fitur-fitur Google Slides...
+                        </p>
+                        <a href="#" class="blog-link">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://picsum.photos/seed/blog3/400/220.jpg" alt="Blog Image" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-category">EdTech</div>
+                        <h3 class="blog-title">Tren Teknologi Pendidikan di Tahun 2023</h3>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 1 Mei 2023</span>
+                            <span><i class="fas fa-clock"></i> 10 menit baca</span>
+                        </div>
+                        <p class="blog-excerpt">
+                            Teknologi pendidikan terus berkembang dengan pesat. Mari kita lihat tren terbaru yang akan membentuk masa depan pembelajaran di Indonesia dan dunia...
+                        </p>
+                        <a href="#" class="blog-link">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Hubungi Saya</h2>
+                    <p class="section-subtitle">
+                        Mari diskusikan kebutuhan pembelajaran digital Anda
+                    </p>
+                </div>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <div class="contact-info-card" data-aos="fade-right">
+                        <h3>Informasi Kontak</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Alamat</h5>
+                                <p>Belitung Timur, Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Telepon</h5>
+                                <p>+62 819-2920-0509</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Email</h5>
+                                <p>fahri.bahari@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" hidden>
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" hidden>
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link" hidden>
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <section>
+<div class="contact-form-card" data-aos="fade-left">
+    <h3>Kirim Pesan</h3>
+    <p>Isi formulir di bawah ini untuk konsultasi atau pemesanan layanan</p>
+    
+    <!-- PERUBAHAN 1: Tag form sudah diperbarui -->
+    <form id="contactForm" action="https://formspree.io/f/mrbylyve" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <!-- PERUBAHAN 2: Tambahkan name="name" -->
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <!-- PERUBAHAN 2: Tambahkan name="email" -->
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telepon</label>
+                    <!-- PERUBAHAN 2: Tambahkan name="phone" -->
+                    <input type="tel" class="form-control" id="phone" name="phone">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="service" class="form-label">Layanan yang Dibutuhkan</label>
+                    <!-- PERUBAHAN 2: Tambahkan name="service" -->
+                    <select class="form-select" id="service" name="service">
+                        <option selected>Pilih Layanan</option>
+                        <option value="1">Workshop untuk Siswa</option>
+                        <option value="2">Pelatihan untuk Guru</option>
+                        <option value="3">Konsultasi Kurikulum</option>
+                        <option value="4">Lainnya</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="message" class="form-label">Pesan</label>
+            <!-- PERUBAHAN 2: Tambahkan name="message" -->
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        
+        <!-- PERUBAHAN 3: Tambahkan div untuk status -->
+        <div id="formStatus"></div>
+        
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
+        </button>
+    </form>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <h3 class="footer-brand">Fahri Informatika</h3>
+                        <p class="footer-description">
+                            Transformasi digital pendidikan Indonesia dengan metode pembelajaran yang menyenangkan dan interaktif.
+                        </p>
+                        <div class="social-links" hidden>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                        <div class="footer-links">
+                            <h5>Menu</h5>
+                            <ul>
+                                <li><a href="#home">Beranda</a></li>
+                                <li><a href="#about">Tentang</a></li>
+                                <li><a href="#services">Layanan</a></li>
+                                <li><a href="#ebook">Ebook</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                        <div class="footer-links">
+                            <h5>Lainnya</h5>
+                            <ul>
+                                <li><a href="#gallery">Galeri</a></li>
+                                <!-- <li><a href="#testimonials">Testimoni</a></li> -->
+                                <!-- <li><a href="#blog">Blog</a></li> --> 
+                                <li><a href="#contact">Kontak</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="footer-links">
+                            <h5>Newsletter</h5>
+                            <p class="footer-description">
+                                Dapatkan tips dan informasi terbaru seputar pendidikan digital langsung di inbox Anda
+                            </p>
+                            <form class="mt-3">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Email Anda">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Fahri, S.Pd. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <a href="https://wa.me/6281929200509" class="fab-button" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Hide loader when page is loaded
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
+
+        // Create particles for hero section
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 15 + Math.random() * 10;
+                
+                particle.style.left = `${posX}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Function to send message to WhatsApp
+        function sendToWhatsApp(inputId) {
+            const message = document.getElementById(inputId).value;
+            const phoneNumber = '6281929200509'; // Nomor WhatsApp tujuan
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Buka WhatsApp di tab baru
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        const navbarToggler = document.querySelector('.navbar-toggler');
+                        navbarToggler.click();
+                    }
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally send the form data to a server
+            // For demo purposes, we'll just show an alert
+            alert('Terima kasih! Pesan Anda telah dikirim. Kami akan segera menghubungi Anda.');
+            this.reset();
+        });
+
+        // Add active class to navigation links based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                
+                if (pageYOffset >= (sectionTop - navHeight - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+
+                   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        const statusDiv = document.getElementById('formStatus');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+
+            const formData = new FormData(form);
+            
+            statusDiv.innerHTML = 'Mengirim pesan...';
+            statusDiv.className = 'info';
+            statusDiv.style.display = 'block';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusDiv.innerHTML = 'Pesan Anda telah terkirim! Terima kasih.';
+                    statusDiv.className = 'success';
+                    form.reset();
+                } else {
+                    statusDiv.innerHTML = 'Oops! Ada masalah saat mengirim pesan.';
+                    statusDiv.className = 'error';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = 'Oops! Ada masalah koneksi. Silakan coba lagi.';
+                statusDiv.className = 'error';
+            }
+        });
+    });
+</script>
+</body>
+</html>
