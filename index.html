@@ -1799,6 +1799,26 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* --- DEBUGGING: Paksa Lebar Penuh di Mobile --- */
+@media (max-width: 768px) {
+    body, html {
+        overflow-x: hidden !important;
+    }
+    
+    .container {
+        max-width: 100% !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    /* Coba juga untuk semua gambar dan video */
+    img, video, iframe {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
+        
     </style>
 </head>
 <body>
