@@ -2558,54 +2558,58 @@
     <h3>Kirim Pesan</h3>
     <p>Isi formulir di bawah ini untuk konsultasi atau pemesanan layanan</p>
     
-    <!-- PERUBAHAN 1: Tag form sudah diperbarui -->
-<!-- GUNAKAN BLOK INI DI FILE UTAMA ANDA -->
-<form id="contactForm" action="https://formspree.io/f/mrbylyve" method="POST">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="name" class="form-label">Nama Lengkap</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="phone" class="form-label">Telepon</label>
-                <input type="tel" class="form-control" id="phone" name="phone">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="service" class="form-label">Layanan yang Dibutuhkan</label>
-                <select class="form-select" id="service" name="service">
-                    <option selected>Pilih Layanan</option>
-                    <option value="1">Workshop untuk Siswa</option>
-                    <option value="2">Pelatihan untuk Guru</option>
-                    <option value="3">Konsultasi Kurikulum</option>
-                    <option value="4">Lainnya</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="message" class="form-label">Pesan</label>
-        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-    </div>
+    <!-- ==================== GUNAKAN BLOK INI ==================== -->
+<div class="contact-form-card" data-aos="fade-left">
+    <h3>Kirim Pesan</h3>
+    <p>Isi formulir di bawah ini untuk konsultasi atau pemesanan layanan</p>
     
-    <div id="formStatus"></div>
-    
-    <button type="submit" class="btn-submit">
-        <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
-    </button>
-</form>
+    <form id="contactForm" action="https://formspree.io/f/mrbylyve" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telepon</label>
+                    <input type="tel" class="form-control" id="phone" name="phone">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="service" class="form-label">Layanan yang Dibutuhkan</label>
+                    <select class="form-select" id="service" name="service">
+                        <option selected>Pilih Layanan</option>
+                        <option value="1">Workshop untuk Siswa</option>
+                        <option value="2">Pelatihan untuk Guru</option>
+                        <option value="3">Konsultasi Kurikulum</option>
+                        <option value="4">Lainnya</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="message" class="form-label">Pesan</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        
+        <div id="formStatus" style="margin-top: 15px; text-align: center; font-weight: bold;"></div>
+        
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
+        </button>
+    </form>
+</div>
 <!-- AKHIR BLOK FORM -->
                 </div>
             </div>
@@ -2821,51 +2825,59 @@
             }
         });
 
-    <!-- LETAKKAN KODE JAVASCRIPT INI DI SINI, SEBELUM </body> -->
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contactForm');
-        const statusDiv = document.getElementById('formStatus');
+    <!-- SCRIPT YANG LEBIH KUAT UNTUK MENGHINDARI KONFLIK -->
+<script>
+    (function() {
+        'use strict';
 
-        // Cek apakah form dan statusDiv ada di halaman
-        if (form && statusDiv) {
-            form.addEventListener('submit', async function(event) {
-                event.preventDefault(); // Mencegah halaman reload
-                const formData = new FormData(form);
+        // Tunggu hingga seluruh halaman dimuat
+        window.addEventListener('load', function() {
+            
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
 
-                // DEBUGGING: Tampilkan data yang akan dikirim ke Console
-                console.log("=== DATA YANG AKAN DIKIRIM ===");
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
-                console.log("==============================");
+            // Pastikan form dan statusDiv ada sebelum menambahkan event listener
+            if (form && statusDiv) {
+                
+                form.addEventListener('submit', async function(event) {
+                    event.preventDefault(); // Cegah reload halaman
 
-                statusDiv.innerText = 'Mengirim...';
-                statusDiv.style.color = 'blue';
+                    const formData = new FormData(form);
+                    
+                    // Tampilkan pesan loading
+                    statusDiv.style.display = 'block';
+                    statusDiv.style.color = '#007bff';
+                    statusDiv.innerText = 'Mengirim pesan...';
 
-                try {
-                    const response = await fetch(form.action, { 
-                        method: 'POST', 
-                        body: formData, 
-                        headers: { 'Accept': 'application/json' } 
-                    });
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
 
-                    if (response.ok) {
-                        statusDiv.innerText = 'BERHASIL! Pesan terkirim.';
-                        statusDiv.style.color = 'green';
-                        form.reset();
-                    } else {
-                        statusDiv.innerText = 'GAGAL! Cek console untuk detail.';
-                        statusDiv.style.color = 'red';
+                        if (response.ok) {
+                            statusDiv.style.color = '#28a745';
+                            statusDiv.innerText = 'Pesan Anda telah terkirim! Terima kasih.';
+                            form.reset(); // Kosongkan form
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    } catch (error) {
+                        statusDiv.style.color = '#dc3545';
+                        statusDiv.innerText = 'Oops! Ada masalah. Silakan coba lagi.';
+                        console.error('Error!', error.message);
                     }
-                } catch (error) {
-                    statusDiv.innerText = 'ERROR KONEKSI! Periksa jaringan Anda.';
-                    statusDiv.style.color = 'red';
-                }
-            });
-        } else {
-            console.error('Form atau statusDiv tidak ditemukan!');
-        }
-    });
+                });
+
+            } else {
+                console.error('Formulir atau div status tidak ditemukan!');
+            }
+        });
+
+    })();
+</script>
+<!-- ==================== AKHIR BLOK ==================== -->
 </script>
 </body>
 </html>
