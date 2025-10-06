@@ -2554,7 +2554,7 @@
                     </div>
                     
                     <section>
-    <!-- ==================== GUNAKAN BLOK INI ==================== -->
+                        
     <!-- ==================== GUNAKAN BLOK INI ==================== -->
 <div class="contact-form-card" data-aos="fade-left">
     <h3>Kirim Pesan</h3>
@@ -2608,7 +2608,7 @@
     </form>
 </div>
 
-<!-- SCRIPT YANG LEBIH KUAT UNTUK MENGHINDARI KONFLIK -->
+<!-- SCRIPT YANG DIPERBAIKI DENGAN DEBUGGING -->
 <script>
     (function() {
         'use strict';
@@ -2622,10 +2622,20 @@
             // Pastikan form dan statusDiv ada sebelum menambahkan event listener
             if (form && statusDiv) {
                 
-                form.addEventListener('submit', async function(event) {
+                // Hapus semua event listener yang mungkin sudah ada
+                const newForm = form.cloneNode(true);
+                form.parentNode.replaceChild(newForm, form);
+                
+                // Tambahkan event listener ke form baru
+                newForm.addEventListener('submit', async function(event) {
                     event.preventDefault(); // Cegah reload halaman
-
-                    const formData = new FormData(form);
+                    
+                    // Log semua data form untuk debugging
+                    const formData = new FormData(newForm);
+                    console.log('Form data yang akan dikirim:');
+                    for (let pair of formData.entries()) {
+                        console.log(pair[0] + ': ' + pair[1]);
+                    }
                     
                     // Tampilkan pesan loading
                     statusDiv.style.display = 'block';
@@ -2633,7 +2643,7 @@
                     statusDiv.innerText = 'Mengirim pesan...';
 
                     try {
-                        const response = await fetch(form.action, {
+                        const response = await fetch(newForm.action, {
                             method: 'POST',
                             body: formData,
                             headers: { 'Accept': 'application/json' }
@@ -2642,8 +2652,10 @@
                         if (response.ok) {
                             statusDiv.style.color = '#28a745';
                             statusDiv.innerText = 'Pesan Anda telah terkirim! Terima kasih.';
-                            form.reset(); // Kosongkan form
+                            newForm.reset(); // Kosongkan form
                         } else {
+                            const errorData = await response.json();
+                            console.error('Error dari Formspree:', errorData);
                             throw new Error('Form submission failed');
                         }
                     } catch (error) {
@@ -2661,7 +2673,7 @@
     })();
 </script>
 <!-- ==================== AKHIR BLOK ==================== -->
-    <!-- AKHIR BLOK FORM -->
+
                 </div>
             </div>
         </div>
