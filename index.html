@@ -2529,6 +2529,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeServiceToggle();
         });
+
+        // Auto close navbar on scroll for mobile only
+window.addEventListener('scroll', function() {
+    if (window.innerWidth <= 768) {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            navbarToggler.click();
+        }
+    }
+});
+        
     </script>
 </body>
 </html>
